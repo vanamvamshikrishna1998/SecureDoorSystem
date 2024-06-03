@@ -67,6 +67,22 @@ function showSuccessMessage() {
   }, 2000);
 }
 
+function showErrorMessage() {
+  const errorMessage = document.createElement('div');
+  errorMessage.className = 'error-message';
+  errorMessage.innerHTML = `
+    <div class="error-content">
+      <i class="fas fa-times-circle"></i>
+      <p>Failure!</p>
+    </div>
+  `;
+  document.body.appendChild(errorMessage);
+
+  setTimeout(() => {
+    errorMessage.remove();
+  }, 2000);
+}
+
 async function scanQRCode(door) {
   console.log("Scanning QR Code for door", door);
 
@@ -112,7 +128,7 @@ async function scanQRCode(door) {
           alert('No user logged in');
         }
       } else {
-        alert('QR Code does not match the door number');
+        showErrorMessage();
         stream.getTracks().forEach(track => track.stop());
         qrScanner.stop();
         overlay.remove();
