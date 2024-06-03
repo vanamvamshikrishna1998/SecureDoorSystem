@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Door System - Doors</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="icon" href="favicon.ico">
+  <style>
+    .success-message {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .success-content {
+      text-align: center;
+      color: white;
+    }
+    .success-content i {
+      font-size: 5rem;
+      color: green;
+    }
+    .success-content p {
+      font-size: 2rem;
+    }
+    #preview {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Your Doors</h1>
+    <ul id="door-list"></ul>
+    <button id="register-new-door-button" class="action-button"><i class="fas fa-plus"></i> Register New Door</button>
+    <button id="logout-button" class="action-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    <!-- Video element for camera feed -->
+    <video id="preview"></video>
+  </div>
+  <!-- Include local Instascan script -->
+  <script src="instascan.min.js"></script>
+  <!-- Firebase Initialization -->
+  <script type="module" src="firebase-init.js"></script>
+  <!-- Custom Scripts -->
+  <script type="module" src="door-scripts.js"></script>
+</body>
+</html>
