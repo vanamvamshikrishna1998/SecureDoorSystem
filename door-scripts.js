@@ -1,6 +1,7 @@
 import { auth, database } from './firebase-init.js';
 import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { ref, set, get, remove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+import QrScanner from './qr-scanner.min.js'; // Ensure this path is correct
 
 console.log("Door Scripts loaded");
 
@@ -70,8 +71,8 @@ async function scanQRCode(door) {
   console.log("Scanning QR Code for door", door);
 
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
     const video = document.getElementById('preview');
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
     video.srcObject = stream;
     video.play();
 
@@ -111,6 +112,7 @@ async function scanQRCode(door) {
         qrScanner.stop();
       }
     });
+
     qrScanner.start();
   } catch (error) {
     console.error("Error accessing the camera", error);
