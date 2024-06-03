@@ -66,69 +66,56 @@ function showSuccessMessage() {
   }, 2000);
 }
 
-function scanQRCode(door) {
+async function scanQRCode(door) {
   console.log("Scanning QR Code for door", door);
 
-  let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-  scanner.addListener('scan', function (content) {
-    const user = auth.currentUser;
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+    const video = document.getElementById('preview');
+    video.srcObject = stream;
+    video.play();
 
-    console.log("QR Code scanned", content);
+    const qrScanner = new QrScanner(video, result => {
+      console.log("QR Code scanned", result);
+      if (result === door) {
+        const user = auth.currentUser;
+        if (user) {
+          const doorRef = ref(database, 'users/' + user.email.replace('.', '_') + '/' + door);
+          set(doorRef, true)
+            .then(() => {
+              showSuccessMessage();
+              loadDoors();
+              stream.getTracks().forEach(track => track.stop());
+              qrScanner.stop();
 
-    if (user) {
-      if (content === door) { // Check if the scanned QR code matches the door number
-        const doorRef = ref(database, 'users/' + user.email.replace('.', '_') + '/' + door);
-        set(doorRef, true)
-          .then(() => {
-            showSuccessMessage();
-            loadDoors();
-            scanner.stop();
-
-            // Set the door value to false after 10 seconds
-            setTimeout(() => {
-              set(doorRef, false).then(() => {
-                loadDoors();
-              }).catch(error => {
-                console.error("Error reverting door status:", error);
-                alert(error.message);
-              });
-            }, 10000);
-          })
-          .catch(error => {
-            console.error("QR Code scan error:", error);
-            alert(error.message);
-          });
-      } else {
-        alert('QR Code does not match the door number');
-        scanner.stop();
-      }
-    } else {
-      alert('No user logged in');
-    }
-  });
-
-  function startScanner(cameraIndex = 0) {
-    Instascan.Camera.getCameras().then(function (cameras) {
-      if (cameras.length > 0) {
-        if (cameraIndex < cameras.length) {
-          scanner.start(cameras[cameraIndex]).catch(function (e) {
-            console.error("Error starting scanner with selected camera:", e);
-            alert('Error starting scanner with selected camera. Trying next camera.');
-            startScanner(cameraIndex + 1);
-          });
+              // Set the door value to false after 10 seconds
+              setTimeout(() => {
+                set(doorRef, false).then(() => {
+                  loadDoors();
+                }).catch(error => {
+                  console.error("Error reverting door status:", error);
+                  alert(error.message);
+                });
+              }, 10000);
+            })
+            .catch(error => {
+              console.error("QR Code scan error:", error);
+              alert(error.message);
+            });
         } else {
-          alert('No cameras available to start scanner.');
+          alert('No user logged in');
         }
       } else {
-        alert('No cameras found.');
+        alert('QR Code does not match the door number');
+        stream.getTracks().forEach(track => track.stop());
+        qrScanner.stop();
       }
-    }).catch(function (e) {
-      console.error("Camera error:", e);
-      alert(e);
     });
+    qrScanner.start();
+  } catch (error) {
+    console.error("Error accessing the camera", error);
+    alert('Error accessing the camera: ' + error.message);
   }
-
-  startScanner();
 }
 
 function deleteDoor(door) {
