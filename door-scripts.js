@@ -107,16 +107,28 @@ function scanQRCode(door) {
     }
   });
 
-  Instascan.Camera.getCameras().then(function (cameras) {
-    if (cameras.length > 0) {
-      scanner.start(cameras[0]);
-    } else {
-      alert('No cameras found.');
-    }
-  }).catch(function (e) {
-    console.error("Camera error:", e);
-    alert(e);
-  });
+  function startScanner(cameraIndex = 0) {
+    Instascan.Camera.getCameras().then(function (cameras) {
+      if (cameras.length > 0) {
+        if (cameraIndex < cameras.length) {
+          scanner.start(cameras[cameraIndex]).catch(function (e) {
+            console.error("Error starting scanner with selected camera:", e);
+            alert('Error starting scanner with selected camera. Trying next camera.');
+            startScanner(cameraIndex + 1);
+          });
+        } else {
+          alert('No cameras available to start scanner.');
+        }
+      } else {
+        alert('No cameras found.');
+      }
+    }).catch(function (e) {
+      console.error("Camera error:", e);
+      alert(e);
+    });
+  }
+
+  startScanner();
 }
 
 function deleteDoor(door) {
