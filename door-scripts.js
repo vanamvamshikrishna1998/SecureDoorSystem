@@ -76,6 +76,10 @@ async function scanQRCode(door) {
     video.srcObject = stream;
     video.play();
 
+    const overlay = document.createElement('div');
+    overlay.className = 'scan-overlay';
+    document.body.appendChild(overlay);
+
     const qrScanner = new QrScanner(video, result => {
       console.log("QR Code scanned", result);
       if (result === door) {
@@ -88,6 +92,7 @@ async function scanQRCode(door) {
               loadDoors();
               stream.getTracks().forEach(track => track.stop());
               qrScanner.stop();
+              overlay.remove();
 
               // Set the door value to false after 10 seconds
               setTimeout(() => {
@@ -110,6 +115,7 @@ async function scanQRCode(door) {
         alert('QR Code does not match the door number');
         stream.getTracks().forEach(track => track.stop());
         qrScanner.stop();
+        overlay.remove();
       }
     });
 
