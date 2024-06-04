@@ -47,8 +47,10 @@ function loadDoors() {
 
 function scanQRCode(doorCode) {
   const videoElement = document.getElementById('qr-video');
+  const stopButton = document.getElementById('stop-scanner');
   videoElement.style.width = '300px'; // Set the size for better user experience
   videoElement.style.display = 'block'; // Ensure the video element is visible
+  stopButton.style.display = 'block';
 
   const qrScanner = new QrScanner(videoElement, result => {
     console.log('Decoded QR code:', result.data); // Logging the actual data scanned
@@ -61,6 +63,7 @@ function scanQRCode(doorCode) {
       }, 10000);
       qrScanner.stop(); // Stop scanning after a successful match
       videoElement.style.display = 'none'; // Hide the video element after scanning
+      stopButton.style.display = 'none';
     } else {
       console.log(`Mismatch: QR Code (${result.data}) does not match Door Code (${doorCode})`);
       showErrorMessage();
@@ -79,20 +82,16 @@ function scanQRCode(doorCode) {
     console.error('Error starting QR Scanner:', err);
     alert('Error starting QR Scanner: ' + err);
     videoElement.style.display = 'none'; // Hide the video element if scanner fails to start
+    stopButton.style.display = 'none';
   });
 
-  // Optional: Provide a way to stop the scanner manually, e.g., a button
-  document.getElementById('stop-scanner').addEventListener('click', () => {
+  // Ensure the stop button works
+  stopButton.onclick = () => {
     qrScanner.stop();
     videoElement.style.display = 'none';
-  });
-
+    stopButton.style.display = 'none';
+  };
 }
-
-
-
-
-
 
 function updateDoorStatus(doorCode, status) {
   const user = auth.currentUser;
@@ -104,33 +103,6 @@ function updateDoorStatus(doorCode, status) {
       console.error("Firebase set error:", error);
       alert("Error updating door status in Firebase: " + error.message);
     });
-  }
-}
-
-
-
-
-function checkQrCode(decodedText, doorCode, qrScanner, videoElement) {
-  console.log(`Checking decoded text: ${decodedText} against door code: ${doorCode}`);
-  if (decodedText === doorCode) {
-    showSuccessMessage();
-    const user = auth.currentUser;
-    const doorRef = ref(database, 'users/' + user.email.replace('.', '_') + '/' + doorCode);
-    set(doorRef, true).then(() => {
-      setTimeout(() => {
-        set(doorRef, false); // Reset the door status after 10 seconds
-      }, 10000);
-      qrScanner.stop(); // Stop scanning when done
-      videoElement.style.display = 'none'; // Hide video element
-    }).catch(error => {
-      console.error("Firebase set error:", error);
-    });
-  } else {
-    showErrorMessage();
-    setTimeout(() => {
-      qrScanner.stop(); // Stop scanning when done
-      videoElement.style.display = 'none'; // Hide video element
-    }, 10000);
   }
 }
 
@@ -169,7 +141,6 @@ function showErrorMessage() {
     }, 3000); // Adjust timing to match animation duration
   }, 10);
 }
-
 
 function deleteDoor(door) {
   const user = auth.currentUser;

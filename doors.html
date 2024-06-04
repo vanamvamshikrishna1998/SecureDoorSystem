@@ -25,43 +25,50 @@
       text-align: center;
       color: white;
     }
-    .success-content i {
+    .success-content i, .error-content i {
       font-size: 5rem;
+    }
+    .success-content i {
       color: green;
     }
     .error-content i {
-      font-size: 5rem;
       color: red;
     }
     .success-content p, .error-content p {
       font-size: 2rem;
     }
-    #preview {
-      width: 100%;
-      height: auto;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-    }
-    .scan-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+
+    .scanner-container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      z-index: 999;
+      justify-content: center;
+      padding: 20px;
+      margin-top: 20px;
     }
-    .scan-overlay::before {
-      content: '';
-      display: block;
+    
+    #qr-video {
+      width: 100%; /* Ensures it takes up the correct amount of space */
+      max-width: 300px; /* Limits how wide the video can get, preventing it from being too large */
+      height: auto; /* Maintains aspect ratio */
+      margin-bottom: 20px; /* Provides space between the video and the button */
+    }
+    
+    #stop-scanner {
+      
       width: 80%;
-      height: 80%;
-      border: 2px dashed #fff;
+      max-width: 200px;
+      padding: 10px 20px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      margin-top: 20px; /* Ensures there is clear space between the video feed and the button */
     }
-  </style>
+    
+</style>
+
 </head>
 <body>
   <div class="container">
@@ -69,11 +76,10 @@
     <ul id="door-list"></ul>
     <button id="register-new-door-button" class="action-button"><i class="fas fa-plus"></i> Register New Door</button>
     <button id="logout-button" class="action-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
-    <button id="stop-scanner">Stop Scanner</button>
-
-    <!-- Video element for camera feed -->
-    <!-- <video id="preview"></video> -->
-    <video id="qr-video" style="display: none; "></video>
+    <div class="scanner-container">
+      <video id="qr-video" style="display: none;"></video>
+      <button id="stop-scanner" style="display: none;">Stop Scanner</button>
+    </div>
   </div>
   <!-- Firebase Initialization -->
   <script type="module" src="firebase-init.js"></script>
