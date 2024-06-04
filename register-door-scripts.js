@@ -11,7 +11,7 @@ function registerDoor() {
 
   if (user) {
     const userRef = ref(database, 'users/' + user.email.replace('.', '_') + '/' + doorSerial);
-    set(userRef, true)
+    set(userRef, false)
       .then(() => {
         alert('Door Registered');
         window.location.href = 'doors.html';

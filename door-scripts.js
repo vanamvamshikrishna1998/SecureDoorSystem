@@ -86,7 +86,9 @@ function scanQRCode(doorCode) {
     qrScanner.stop();
     videoElement.style.display = 'none';
   });
+
 }
+
 
 
 
@@ -195,6 +197,11 @@ onAuthStateChanged(auth, user => {
     window.location.href = 'index.html';
   }
 });
+
+document.getElementById('logout-button').onclick = logout;
+document.getElementById('register-new-door-button').onclick = () => {
+  window.location.href = 'register-door.html';
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log("Document loaded");
