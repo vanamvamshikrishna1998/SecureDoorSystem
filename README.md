@@ -1,3 +1,4 @@
+
 # Secure Door System
 
 ## Overview
@@ -19,11 +20,14 @@ The Secure Door System is a robust and innovative security solution designed for
 
 ## Project Structure
 
-- `/src` - Contains the source code for the ESP32.
-- `/web` - Contains the files for the web interface.
-- `/docs` - Documentation and setup guides.
-- `/hardware` - Circuit diagrams and PCB designs.
-
+```
+/SecureDoorSystem
+│
+├── /src                # Source code for the ESP32
+├── /web                # Web interface files
+├── /docs               # Documentation and setup guides
+└── /hardware           # Hardware schematics and PCB designs
+```
 
 ## Getting Started
 
@@ -44,24 +48,26 @@ The Secure Door System is a robust and innovative security solution designed for
 ### Software Setup
 
 1. **Clone the Repository**
-- git clone https://github.com/vanamvamshikrishna1998/SecureDoorSystem.git
-- cd SecureDoorSystem
+   ```
+   git clone https://github.com/vanamvamshikrishna1998/SecureDoorSystem.git
+   cd SecureDoorSystem
+   ```
 
 2. **Firebase Configuration**
-- Create a new Firebase project in the Firebase console.
-- Enable the Firestore Database and Authentication modules.
-- Download the Firebase configuration file and integrate it into the project settings.
+   - Create a new Firebase project in the Firebase console.
+   - Enable the Firestore Database and Authentication modules.
+   - Download the Firebase configuration file and integrate it into the project settings.
 
 3. **ESP32 Configuration**
-- Install the ESP32 board definitions in the Arduino IDE or preferred development environment.
-- Load the source code from `/src`.
-- Update the Wi-Fi and Firebase credentials in the configuration files.
-- Upload the firmware to the ESP32.
+   - Install the ESP32 board definitions in the Arduino IDE or preferred development environment.
+   - Load the source code from `/src`.
+   - Update the Wi-Fi and Firebase credentials in the configuration files.
+   - Upload the firmware to the ESP32.
 
 4. **Web Interface Setup**
-- Navigate to the `/web` directory.
-- Update the Firebase configuration within the HTML files to connect to your Firebase project.
-- Optionally, deploy the web interface to a public server or host locally for development and testing.
+   - Navigate to the `/web` directory.
+   - Update the Firebase configuration within the HTML files to connect to your Firebase project.
+   - Optionally, deploy the web interface to a public server or host locally for development and testing.
 
 ## Usage
 
