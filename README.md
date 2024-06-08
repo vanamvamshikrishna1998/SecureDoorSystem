@@ -1,122 +1,95 @@
-\documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{hyperref}
-\usepackage{geometry}
-\geometry{a4paper, margin=1in}
-\usepackage{graphicx}
-\usepackage{listings}
+# Secure Door System
 
-\title{Secure Door System Documentation}
-\author{Vamshi Krishna Vanam}
-\date{}
+## Overview
+The Secure Door System is a robust and innovative security solution designed for modern access control. Utilizing an ESP32 microcontroller, this system integrates with Firebase for efficient real-time data handling, offering a secure and user-friendly interface for managing access permissions. This system is ideal for enhancing the security of both residential and commercial properties.
 
-\begin{document}
+## Key Features
 
-\maketitle
+- **Real-time Access Control**: Monitors and manages door access in real-time.
+- **QR Code-based Entry**: Facilitates entry through secure, personalized QR codes for each registered user.
+- **Firebase Backend**: Leverages Firebase for robust backend operations including user management, authentication, and access logging.
+- **Remote Management Interface**: Enables remote administration through a user-friendly web interface, allowing administrators to manage users and view access logs from anywhere.
 
-\section*{Overview}
-The Secure Door System is an advanced security solution designed to automate access control using modern technology. This project utilizes ESP32 for its core microcontroller, integrates with Firebase for real-time data handling, and provides a secure and user-friendly web interface for managing access permissions. It's an ideal system for residential and commercial buildings looking to modernize their access control mechanisms.
+## Technology Stack
 
-\section*{Key Features}
-\begin{itemize}
-    \item Real-time Access Control: Manage and monitor door access in real-time.
-    \item QR Code-based Entry: Simplifies the entry process through secure, personalized QR codes for each registered user.
-    \item Firebase Backend: Utilizes Firebase for secure, scalable, and robust backend operations including user management and access logging.
-    \item Remote Management Interface: A web-based interface allows admins to manage users and view access logs from anywhere.
-\end{itemize}
+- **ESP32**: Core controller for managing the door lock mechanisms and QR code scanning.
+- **Firebase**: Handles database management, user authentication, and backend logic.
+- **HTML/CSS/JavaScript**: Implements the administrative front-end for user and access management.
+- **Arduino**: Utilized for programming the ESP32 with necessary functionalities.
 
-\section*{Technology Stack}
-\begin{itemize}
-    \item ESP32: Controls the door locking mechanism and handles the QR code scanning.
-    \item Firebase: Used for backend services like database management, user authentication, and server-side logic.
-    \item HTML/CSS/JavaScript: Powers the administrative front-end for user and access management.
-    \item Arduino: Programming environment for ESP32.
-\end{itemize}
+## Project Structure
 
-\section*{Project Structure}
-\begin{itemize}
-    \item \texttt{/src} - Contains the source code for the ESP32.
-    \item \texttt{/web} - Contains the files for the web interface.
-    \item \texttt{/docs} - Documentation and setup guides.
-    \item \texttt{/hardware} - Circuit diagrams and PCB designs.
-\end{itemize}
+- `/src` - Contains the source code for the ESP32.
+- `/web` - Contains the files for the web interface.
+- `/docs` - Documentation and setup guides.
+- `/hardware` - Circuit diagrams and PCB designs.
 
-\section*{Getting Started}
 
-\subsection*{Prerequisites}
-\begin{itemize}
-    \item ESP32 development board.
-    \item Electronic lock mechanism compatible with ESP32.
-    \item QR code scanner compatible with ESP32.
-    \item Basic electronic components (wires, resistors, breadboard).
-    \item Access to a Firebase account.
-\end{itemize}
+## Getting Started
 
-\subsection*{Hardware Setup}
-\begin{enumerate}
-    \item Assemble the circuit as per the schematics in the \texttt{/hardware} directory.
-    \item Connect the electronic door lock to the ESP32.
-    \item Setup the QR code scanner with the ESP32.
-\end{enumerate}
+### Prerequisites
 
-\subsection*{Software Setup}
-\begin{enumerate}
-    \item \textbf{Clone the Repository:}
-    \begin{lstlisting}[language=bash]
-    git clone https://github.com/vanamvamshikrishna1998/SecureDoorSystem.git
-    cd SecureDoorSystem
-    \end{lstlisting}
-    \item \textbf{Firebase Configuration:}
-    \begin{itemize}
-        \item Set up a new Firebase project in the Firebase console.
-        \item Enable Firestore Database and Authentication modules.
-        \item Download the Firebase config file and replace the placeholders in the project.
-    \end{itemize}
-    \item \textbf{ESP32 Configuration:}
-    \begin{itemize}
-        \item Install the ESP32 board definitions in the Arduino IDE.
-        \item Open the project in \texttt{/src} and edit the Wi-Fi and Firebase credentials.
-        \item Upload the code to your ESP32 board.
-    \end{itemize}
-    \item \textbf{Web Interface Setup:}
-    \begin{itemize}
-        \item Navigate to the \texttt{/web} directory.
-        \item Update the Firebase config in the HTML files.
-        \item Deploy the interface to a web server or run locally for testing.
-    \end{itemize}
-\end{enumerate}
+- ESP32 development board
+- Electronic lock mechanism compatible with ESP32
+- QR code scanner compatible with ESP32
+- Basic electronic components such as wires, resistors, and a breadboard
+- Firebase account
 
-\section*{Usage Instructions}
-\begin{itemize}
-    \item User Registration: Admins can register users through the web interface, assigning unique QR codes.
-    \item Door Access: Users scan their QR code at the door's scanner to gain entry.
-    \item Monitoring Access: Admins can monitor access logs in real-time via the web interface.
-\end{itemize}
+### Hardware Setup
 
-\section*{Contributing}
-Contributions to improve the Secure Door System are welcome. Follow the steps below to contribute:
-\begin{enumerate}
-    \item Fork the repository.
-    \item Create a new branch (\texttt{git checkout -b feature/YourFeature}).
-    \item Commit your changes (\texttt{git commit -am 'Add some YourFeature'}).
-    \item Push to the branch (\texttt{git push origin feature/YourFeature}).
-    \item Create a new Pull Request.
-\end{enumerate}
+1. Assemble the circuit as per the schematics in the `/hardware` directory.
+2. Connect the electronic door lock to the ESP32 module.
+3. Setup the QR code scanner module with the ESP32.
 
-\section*{License}
-This project is licensed under the MIT License - see the \href{https://github.com/vanamvamshikrishna1998/SecureDoorSystem/LICENSE}{LICENSE.md} file for details.
+### Software Setup
 
-\section*{Contact}
-\begin{itemize}
-    \item Vamshi Krishna Vanam - \href{mailto:vanamvamshi1998@gmail.com}{vanamvamshi1998@gmail.com}
-    \item GitHub Project Link - \href{https://github.com/vanamvamshikrishna1998/SecureDoorSystem}{Secure Door System}
-\end{itemize}
+1. **Clone the Repository**
+- git clone https://github.com/vanamvamshikrishna1998/SecureDoorSystem.git
+- cd SecureDoorSystem
 
-\section*{Acknowledgements}
-\begin{itemize}
-    \item \href{https://www.espressif.com/}{Espressif Systems}
-    \item \href{https://firebase.google.com/}{Firebase}
-    \item \href{https://www.arduino.cc/}{Arduino}
-\end{itemize}
+2. **Firebase Configuration**
+- Create a new Firebase project in the Firebase console.
+- Enable the Firestore Database and Authentication modules.
+- Download the Firebase configuration file and integrate it into the project settings.
 
-\end{document}
+3. **ESP32 Configuration**
+- Install the ESP32 board definitions in the Arduino IDE or preferred development environment.
+- Load the source code from `/src`.
+- Update the Wi-Fi and Firebase credentials in the configuration files.
+- Upload the firmware to the ESP32.
+
+4. **Web Interface Setup**
+- Navigate to the `/web` directory.
+- Update the Firebase configuration within the HTML files to connect to your Firebase project.
+- Optionally, deploy the web interface to a public server or host locally for development and testing.
+
+## Usage
+
+- **User Registration**: Administrators can add users through the web interface, assigning each a unique QR code linked to their profile.
+- **Accessing the Door**: Users gain entry by scanning their assigned QR code at the door's QR scanner.
+- **Access Monitoring**: Administrators can track and monitor entry logs in real-time through the web interface.
+
+## Contributing
+
+We welcome contributions to the Secure Door System. To contribute:
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4. Push to the branch (`git push origin feature/AmazingFeature`).
+5. Open a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+- **Vamshi Krishna Vanam** - vanamvamshi1998@gmail.com
+- **Project Link** - [https://github.com/vanamvamshikrishna1998/SecureDoorSystem](https://github.com/vanamvamshikrishna1998/SecureDoorSystem)
+
+## Acknowledgements
+
+- [Espressif Systems](https://www.espressif.com/)
+- [Firebase](https://firebase.google.com/)
+- [Arduino](https://www.arduino.cc/)
