@@ -7,7 +7,7 @@ The Secure Door System is a robust and innovative security solution designed for
 ## Key Features
 
 - **Real-time Access Control**: Monitors and manages door access in real-time.
-- **QR Code-based Entry**: Facilitates entry through secure, personalized QR codes for each registered user.
+- **QR Code-based Entry**: Facilitates entry through secure, personalized QR codes for door.
 - **Firebase Backend**: Leverages Firebase for robust backend operations including user management, authentication, and access logging.
 - **Remote Management Interface**: Enables remote administration through a user-friendly web interface, allowing administrators to manage users and view access logs from anywhere.
 
@@ -18,24 +18,12 @@ The Secure Door System is a robust and innovative security solution designed for
 - **HTML/CSS/JavaScript**: Implements the administrative front-end for user and access management.
 - **Arduino**: Utilized for programming the ESP32 with necessary functionalities.
 
-## Project Structure
-
-```
-/SecureDoorSystem
-│
-├── /src                # Source code for the ESP32
-├── /web                # Web interface files
-├── /docs               # Documentation and setup guides
-└── /hardware           # Hardware schematics and PCB designs
-```
-
 ## Getting Started
 
 ### Prerequisites
 
 - ESP32 development board
 - Electronic lock mechanism compatible with ESP32
-- QR code scanner compatible with ESP32
 - Basic electronic components such as wires, resistors, and a breadboard
 - Firebase account
 
@@ -43,7 +31,7 @@ The Secure Door System is a robust and innovative security solution designed for
 
 1. Assemble the circuit as per the schematics in the `/hardware` directory.
 2. Connect the electronic door lock to the ESP32 module.
-3. Setup the QR code scanner module with the ESP32.
+3. Paste the QR code scanner with the ESP32.
 
 ### Software Setup
 
@@ -73,7 +61,7 @@ The Secure Door System is a robust and innovative security solution designed for
 
 - **User Registration**: Administrators can add users through the web interface, assigning each a unique QR code linked to their profile.
 - **Accessing the Door**: Users gain entry by scanning their assigned QR code at the door's QR scanner.
-- **Access Monitoring**: Administrators can track and monitor entry logs in real-time through the web interface.
+- **Access Monitoring**: Administrators can monitor the door in real-time through the web interface.
 
 ## Contributing
 
